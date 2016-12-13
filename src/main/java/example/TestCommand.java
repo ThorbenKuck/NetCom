@@ -2,20 +2,14 @@ package example;
 
 import de.thorbenkuck.netcom.central.NetComCommand;
 
-public class TestCommand extends NetComCommand {
+public class TestCommand extends NetComCommand<TestCommandObject> {
 
-	private String message;
-
-	public TestCommand(String message) {
-		this.message = message;
+	public TestCommand(TestCommandObject t) {
+		super(t);
 	}
 
 	@Override
 	public boolean getDefaultAcknowledge() {
 		return true;
-	}
-
-	public String getMessage() {
-		return message;
 	}
 }

@@ -35,4 +35,8 @@ public class LocalClient extends Client {
 	public static void setSocketFactory(Factory<ConnectTo, Socket> factory) {
 		socketFactory = factory;
 	}
+
+	public void sendToServer(NetComCommand command) {
+		getSendQueue().add(command);
+	}
 }

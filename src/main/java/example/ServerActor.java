@@ -15,8 +15,8 @@ public class ServerActor extends ServerStart<User> {
 		actor.launch();
 
 		actor.commandRegistration.register(TestCommand.class, (command, client) -> {
-			System.out.println(command.getMessage());
-			client.getSendQueue().add(new TestCommand("pong"));
+			System.out.println(command.getCommandObject().getMessage());
+			client.getSendQueue().add(new TestCommand(new TestCommandObject("pong")));
 		});
 	}
 }
