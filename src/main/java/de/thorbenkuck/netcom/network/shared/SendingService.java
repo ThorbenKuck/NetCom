@@ -37,6 +37,7 @@ public class SendingService extends StoppableRunnable {
 			synchronized (out) {
 				try {
 					NetComCommand comCommand = (NetComCommand) toSend.take();
+					logger.debug("sending: " + comCommand);
 					boolean defaultAcknowledge = comCommand.getDefaultAcknowledge();
 					send(comCommand);
 					if (defaultAcknowledge) {

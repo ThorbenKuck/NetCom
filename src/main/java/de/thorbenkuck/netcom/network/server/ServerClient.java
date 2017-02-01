@@ -26,6 +26,10 @@ public class ServerClient<UserType extends User> extends Client {
 		return loggedInAs;
 	}
 
+	public void setDisconnectedHandler(DisconnectedHandler newDisconnectedHandler) {
+		disconnectedHandler = newDisconnectedHandler;
+	}
+
 	public void setLoggedInAs(UserType user) {
 		this.loggedInAs = user;
 	}

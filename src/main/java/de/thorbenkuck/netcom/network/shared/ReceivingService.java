@@ -7,6 +7,8 @@ import de.thorbenkuck.netcom.central.commands.Acknowledge;
 import de.thorbenkuck.netcom.datatypes.abstracts.StoppableRunnable;
 import de.thorbenkuck.netcom.exceptions.DeSerialisationFailedException;
 import de.thorbenkuck.netcom.network.serial.DeserializerAdapter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.NoSuchElementException;
@@ -19,6 +21,7 @@ public class ReceivingService extends StoppableRunnable {
 	private DeserializerAdapter<NetComCommand> deserializerAdapter;
 	private Client client;
 	private Scanner in;
+	private final Logger logger = LogManager.getLogger();
 
 	public ReceivingService(DisconnectedHandler disconnectedHandler,
 							Client client, final CommandRegistration commandRegistration,
@@ -40,6 +43,7 @@ public class ReceivingService extends StoppableRunnable {
 			try {
 				String string = in.nextLine();
 				NetComCommand command = deserialize(string);
+				logger.debug("received: " + command);
 				runCommand(command);
 			} catch (NoSuchElementException e) {
 				// Client disconnected

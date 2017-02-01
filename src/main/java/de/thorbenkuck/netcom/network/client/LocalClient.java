@@ -32,6 +32,10 @@ public class LocalClient extends Client {
 		return "Server: " + addressToString();
 	}
 
+	public void setDisconnectedHandler(DisconnectedHandler newDisconnectedHandler) {
+		disconnectedHandler = newDisconnectedHandler;
+	}
+
 	public static void setSocketFactory(Factory<ConnectTo, Socket> factory) {
 		socketFactory = factory;
 	}
