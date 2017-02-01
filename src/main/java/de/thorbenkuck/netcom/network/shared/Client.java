@@ -13,10 +13,11 @@ import de.thorbenkuck.netcom.network.serial.SerializerAdapter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Observable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Client {
+public class Client extends Observable {
 
 	protected boolean connected;
 	protected final SendQueue<NetComCommand> sendQueue;

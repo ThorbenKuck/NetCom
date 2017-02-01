@@ -1,6 +1,8 @@
 package de.thorbenkuck.netcom.network.shared;
 
-public class User {
+import java.util.Observable;
+
+public class User extends Observable {
 
 	private boolean online = false;
 
@@ -16,5 +18,6 @@ public class User {
 	}
 
 	public void setOffline() {
+		online = false;
 	}
 }
