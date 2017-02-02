@@ -33,6 +33,10 @@ public class ReceivingService extends StoppableRunnable {
 		in = new Scanner(client.getSocket().getInputStream());
 	}
 
+	public void setDisconnectedHandler(DisconnectedHandler disconnectedHandler) {
+		this.disconnectedHandler = disconnectedHandler;
+	}
+
 	public void onDisconnect() {
 		disconnectedHandler.handle(client);
 	}

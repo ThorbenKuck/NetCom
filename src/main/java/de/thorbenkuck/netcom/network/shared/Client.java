@@ -9,6 +9,7 @@ import de.thorbenkuck.netcom.datatypes.ClientToken;
 import de.thorbenkuck.netcom.network.queue.sendqueue.SendQueue;
 import de.thorbenkuck.netcom.network.serial.DeserializerAdapter;
 import de.thorbenkuck.netcom.network.serial.SerializerAdapter;
+import org.apache.logging.log4j.LogManager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -64,6 +65,15 @@ public class Client extends Observable {
 		clientsThreadPool.execute(receivingService);
 	}
 
+	public void setDisconnectedHandler(DisconnectedHandler disconnectedHandler) {
+		if(receivingService != null) {
+			LogManager.getLogger().debug("Overriding existing disconnectedHandler with " + disconnectedHandler);
+			receivingService.setDisconnectedHandler(disconnectedHandler);
+		} else {
+			this.disconnectedHandler = disconnectedHandler;
+		}
+	}
+
 	protected void tryStop() {
 		receivingService.softStop();
 		sendingService.softStop();
@@ -86,10 +96,6 @@ public class Client extends Observable {
 
 	public void setEstablishedConnectionHandler(EstablishedConnectionHandler handler) {
 		this.establishedConnectionHandler = handler;
-	}
-
-	public void setDisconnectedHandler(DisconnectedHandler handler) {
-		this.disconnectedHandler = handler;
 	}
 
 	ReceivingService getReceivingService() {
